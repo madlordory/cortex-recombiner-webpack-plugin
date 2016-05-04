@@ -1,0 +1,27 @@
+{
+  "name": "cortex-recombiner-webpack-plugin",
+  "version": "1.0.1",
+  "description": "a webpack plugin for recombining cortex package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madlordory/cortex-recombiner-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "cortex"
+  ],
+  "author": "Eric Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madlordory/cortex-recombiner-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/madlordory/cortex-recombiner-webpack-plugin#readme",
+  "dependencies": {
+    "cortex-recombiner": "^1.0.10"
+  }
+}

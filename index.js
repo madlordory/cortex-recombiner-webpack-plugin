@@ -1,6 +1,7 @@
 /**
  * Created by madlord on 16/5/4.
  */
+var colors = require('colors');
 var path=require('path');
 var recombiner = require('cortex-recombiner');
 
@@ -10,7 +11,7 @@ function recombine () {
         base:_opt.base|| __dirname,//项目根目录
         noBeta: !!_opt.noBeta//忽略neurons文件夹下beta版本的cortex包，如果开启此项功能，则必须保证neurons下所有的包都含有非beta版本
     });
-    console.log("cortex recombination complete");
+    console.log("cortex recombination complete".green);
 }
 
 function CortexRecombinerPlugin(options) {
@@ -19,7 +20,7 @@ function CortexRecombinerPlugin(options) {
 
 CortexRecombinerPlugin.prototype.apply = function(compiler) {
 
-
+    recombine();
     compiler.plugin("after-environment", function() {
         compiler.watchFileSystem = new IgnoringWatchFileSystem(compiler.watchFileSystem,[path.resolve(_opt.base,"./node_modules/@cortex/")] );
     }.bind(this));

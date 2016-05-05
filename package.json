@@ -1,6 +1,6 @@
 {
   "name": "cortex-recombiner-webpack-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a webpack plugin for recombining cortex package",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/madlordory/cortex-recombiner-webpack-plugin#readme",
   "dependencies": {
+    "colors": "^1.1.2",
     "cortex-recombiner": "^1.0.10"
   }
 }

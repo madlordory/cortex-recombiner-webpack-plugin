@@ -7,11 +7,10 @@ var recombiner = require('cortex-recombiner');
 
 var _opt={};
 function recombine () {
-    recombiner({
+    return recombiner({
         base:_opt.base|| __dirname,//项目根目录
         noBeta: !!_opt.noBeta//忽略neurons文件夹下beta版本的cortex包，如果开启此项功能，则必须保证neurons下所有的包都含有非beta版本
     });
-    console.log("cortex recombination complete".green);
 }
 
 function CortexRecombinerPlugin(options) {
@@ -20,7 +19,27 @@ function CortexRecombinerPlugin(options) {
 
 CortexRecombinerPlugin.prototype.apply = function(compiler) {
 
-    recombine();
+    // recombine();
+    compiler.plugin('watch-run',function(compiler,cb) {
+        recombine().then(function(r) {
+            console.log("cortex recombination complete [watch mode]".green);
+            cb();
+        },function (error) {
+            console.log("cortex recombination error [watch mode]".red);
+            cb(error);
+        });
+    })
+
+    compiler.plugin('run',function(compiler,cb) {
+        recombine().then(function(r) {
+            console.log("cortex recombination complete".green);
+            cb();
+        },function (error) {
+            console.log("cortex recombination error".red);
+            cb(error);
+        });
+    })
+
     compiler.plugin("after-environment", function() {
         compiler.watchFileSystem = new IgnoringWatchFileSystem(compiler.watchFileSystem,[path.resolve(_opt.base,"./node_modules/@cortex/")] );
     }.bind(this));
@@ -56,9 +75,7 @@ IgnoringWatchFileSystem.prototype.watch = function(files, dirs, missing, startTi
             dirTimestamps[path] = 1;
         });
 
-        recombine();
 
-        callback(err, filesModified, dirsModified, missingModified, fileTimestamps, dirTimestamps);
     }, callbackUndelayed);
 };
 

@@ -7,14 +7,11 @@ var recombiner = require('cortex-recombiner');
 
 var _opt={};
 function recombine () {
-    return recombiner({
-        base:_opt.base|| __dirname,//项目根目录
-        noBeta: !!_opt.noBeta//忽略neurons文件夹下beta版本的cortex包，如果开启此项功能，则必须保证neurons下所有的包都含有非beta版本
-    });
+    return recombiner(_opt);
 }
 
 function CortexRecombinerPlugin(options) {
-    _opt=options
+    _opt=Object.assign({base:__dirname},options)
 }
 
 CortexRecombinerPlugin.prototype.apply = function(compiler) {

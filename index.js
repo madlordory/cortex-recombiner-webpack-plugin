@@ -38,7 +38,7 @@ CortexRecombinerPlugin.prototype.apply = function(compiler) {
     })
 
     compiler.plugin("after-environment", function() {
-        compiler.watchFileSystem = new IgnoringWatchFileSystem(compiler.watchFileSystem,[path.resolve(_opt.base,"./node_modules/@cortex/")] );
+        compiler.watchFileSystem = new IgnoringWatchFileSystem(compiler.watchFileSystem,[path.resolve(_opt.base,_opt['target_path']||"./node_modules/@cortex/")] );
     }.bind(this));
 };
 

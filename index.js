@@ -6,8 +6,8 @@ var path = require('path');
 var recombiner = require('cortex-recombiner');
 
 var _opt = {};
-function recombine() {
-    return recombiner(_opt);
+function recombine(opt) {
+    return recombiner(opt);
 }
 
 function CortexRecombinerPlugin(options) {
@@ -18,7 +18,7 @@ CortexRecombinerPlugin.prototype.apply = function (compiler) {
 
     // recombine();
     compiler.plugin('watch-run', function (compiler, cb) {
-        recombine().then(function (r) {
+        recombine(_opt).then(function (r) {
             console.log("cortex recombination complete [watch mode]".green);
             cb();
         }, function (error) {

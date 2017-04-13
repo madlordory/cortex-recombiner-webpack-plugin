@@ -28,7 +28,7 @@ CortexRecombinerPlugin.prototype.apply = function (compiler) {
     })
 
     compiler.plugin('run', function (compiler, cb) {
-        recombine().then(function (r) {
+        recombine(_opt).then(function (r) {
             console.log("cortex recombination complete".green);
             cb();
         }, function (error) {
